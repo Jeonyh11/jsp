@@ -1,0 +1,116 @@
+
+Presentation : 사용자 인터페이스(화면)
+Business logic : 업무처리 로직
+Data : data 저장 / 접근 or database server
+
+
+
+전용 Client 프로그램 -> Web browser
+Client : 화면제어
+Server : 비지니스 로직 제어(jsp, mvc framework)
+업데이트 된 부분은 Server에만 배포
+
+
+
+Web server : client의 요청을 받아서 결과를 전송
+		정적 자원 처리에 최적화 (html, css, js, image)
+Web Application server : 로직에 의해 동적 컨텐츠를 생성하여 Web server에 전달
+		Web server의 역할을 겸함(tomcat)
+
+
+정리 
+- Client Server Architecture 와 Web Architecture 비교
+- Web architecture의 장점
+
+---------------------------------------------------------------------------------------------
+
+WWW(Web)
+- 인터넷에 연결된 컴퓨터들을 통해 사람들이 정보를 공유할 수 있는 정보 공간
+- HTTP 프로토콜, 하이퍼텍스트, HTML 형식 등을 사용하여 그림과 문자를 교환하는 전송방식
+- URL을 통해 요청
+
+서버 프로그램 구현하기 - 웹 어플리케이션 서버 방식(was)
+- 요청을 받은 Web Server는 동적 페이지 처리를 Web Application Server에게 위임
+- Was는 처리된 내역을 Web server로 전송, 최종적으로 Web Server가 Client에게 결과 전달
+- servlet/jsp는 thread방식으로 실행 -> 동시처리 성능이 우수
+- servlet/jsp는 main 함수를 통해 실행하지 않는다.**
+
+
+
+servlet : 자바의 웹 개발 표준 스펙, 스펙에 따라 만들어진 소스, 멀티 쓰레드로 실행
+
+jsp : 실행 코드 방식인(jaca) servlet의 스크립트 방식의 표준 스펙
+	jsp 는 실행시 servlet으로 변환되어 실행
+
+Web Container : 표준 규약에 따라 구현된 웹 어플리케이션을 관리하고 실행할 수 있는 소프트웨어 (tomcat, resin, jboss 등)
+
+
+
+Servlet 와 JSP 차이
+ Servlet : 자바 코드 안에 html
+ JSP : html 문서 안에 자바 코드
+
+정리 
+ - 웹의 탄생 배경
+ - URL을 통한 웹서버에 요청/응답 과정
+ - 자바기반의 웹 프로그래밍 개요(Servlet / JSP)
+
+---------------------------------------------------------------------------------------------
+
+Servlet  : server program + let(작다를 뜻하는 접미어) => 작은 서버 프로그램
+
+
+
+Web Application Server  :  WAS(jboss, IBM 웹스피어)
+	Servlet Container + EJB Container
+
+servlet Container[Web Container] (tomcat)
+
+
+
+MIME (Multipurpose Internet Mail Extensions)
+ - 전자우편을 위한 인터넷 표준 포맷
+
+  Content-Type(MiME-Type)
+   - 어떤 형식의 자료를 송/수신 하는지 표시
+    [대표적인 타입] 
+	- html/text, application/json, image/png
+
+-----------------------------
+
+Servlet 생성 / 등록
+ - 클래스 생성 (HttpServlet 상속)
+ - url mapping 
+    url-servlet
+    web.xml
+    @Servlet
+
+
+------------------------------------------------------------- 설명
+Maven Project 
+Group id : 해당 프로젝트를 진행하는 회사에 대한 정보 
+	일반적으로 회사의 도메인 역순으로 기술 
+	ex ] naver.com ==> com.naver
+
+Artifact id : Group id에 해당하는 회사에서 진행하는 프로젝트명
+	ex ] google : GMAIL, GOOGLE DRIVE
+
+Version : 프로젝트의 버전
+	대.중.소
+
+--------------------------------------------------------------
+
+jar : Java ARchive : 클래스들을 묶어 놓은 파일, 압축파일
+
+class , html, jsp, image, css, javascript
+war : Web ARchive : 웹 프로그램을 묶어 놓은 파일
+        tomcat의 webapps 폴더에 war 파일을 복사 해놓고 톰캣을 기동하면 
+        war 파일을 톰캣이 자동으로 압축을 해제하여 웹 어플리케이션이 서비스 되도록 한다.
+
+pom : Project Object model( 프로젝트에 대한 설정 정보 )
+	- 해당 프로젝트를 만든 회사
+	- 프로젝트 이름
+	- 프로젝트의 버전
+	- 프로젝트에서 필요로하는 의존성(dependency) - 라이브러리(ojdbc6.jar)
+	
+porm.xml
