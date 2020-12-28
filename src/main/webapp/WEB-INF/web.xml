@@ -14,6 +14,7 @@
   <servlet>
   	<servlet-name>basicServlet</servlet-name>
   	<servlet-class>kr.or.ddit.servlet.basic.BasicServlet</servlet-class>
+  	<load-on-startup>1</load-on-startup>
   </servlet>
   
   <!-- servlet에서 처리할 url 매핑 -->
