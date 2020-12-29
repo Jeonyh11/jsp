@@ -8,6 +8,9 @@
 </head>
 <body>
 	index.jsp
-
+	
+	webapp/image/brown.png
+	<img src="<%=request.getContextPath() %>/image/brown.png"/> <br>
+	
 </body>
 </html>
