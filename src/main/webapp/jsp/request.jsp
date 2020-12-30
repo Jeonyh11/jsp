@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>request</title>
+	<meta charset="UTF-8">
+	<title>request</title>
 </head>
 <body>
 	request.getContentType() : <%= request.getContentType() %> <br> 
