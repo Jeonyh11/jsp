@@ -1,0 +1,85 @@
+forward : 요청을 처리할 다른 jsp, servlet에게 위임
+	서버안에서 이루어지는 작업으로 클라이언트 입장에서는 누가 응답을 생성 했는지 알 수 없다.
+	request.getRequestDispatcher(url)를 이용하여 requestDispatcher
+	객체를 얻어 forward(request, response)를 실행
+	** 같은 웹 어플리케이션 안에서 일어나는 일이므로 contextPath를 지정하지 않는다
+
+redirect : 클라이언트에게 정해진 주소로 재요청 할 것을 지시
+	redirect 응답을 받은 클라이언트는 재요청 주소로 서버에게 요청한다.
+	원 요청 + 재 요청 : 요청이 총 2번 필요
+	response.sendRedirect("클라이언트가 새롭게 요청할 주소");
+	"클라이언트가 새롭게 요청할 주소" ==> 클라이언트가 사용하는 웹브라우저 주소줄에 표시
+	** contextPath가 있을 경우 지정을 해야함
+
+
+하나의 서버에 복수의 웹 어플리케이션을 기동하는 경우에 발생할 수 있는 url 충돌
+
+첫번째 웹 어플리케이션 : 수업시간에 진행하는 jsp 프로젝트, 컨텍스트 패스 : /
+	webapp/jsp/basic.jsp
+	==> localhost/jsp/basic.jsp
+	 
+	 
+두번째 웹 어플리케이션 : 신규 프로젝트 생성, 컨텍스트 패스 : /jsp
+	webapp/basic.jsp
+	==> localhost/jsp/basic.jsp
+	
+===============> contextPath가 먼저 적용되어 두번째 웹 어플리케이션에서 응답을 생성한다
+클라이언트 입장에서는 url만 보고서 contextPath인지 일반 폴더를 가리키는 경로인지를 판단할 수 없다
+
+
+	
+서버 프로그램 구현기술
+ - 기본 객체와 영역
+    . 기본객체의 종류 및 특성
+    . 영역(scope)의 종류 및 특성
+
+*jsp* 기본 객체
+-------------------------------------------------------------------중요!
+ 스클립플릿에서 별도로 선언 없이 사용할 수 있는 미리 선언되어있는 객체
+ jsp파일이 servlet으로 변환되는 과정(서버가 변환)에서 선언되어있는 것을 확인할 수 있다.(work 폴더에서 확인)
+ 
+ - pageContext 			: 4개의 scope에 접근할 수 있는 객체
+ (type : pageContext)	 getAttribute, setAttribute,
+ 				 		 findAttribute() (pageContext => request => session => application)
+ 				  
+ 				 		 jsp에 선언된 다른 내장객체를 관리
+ 				 		 getPage(), getRequest(), getSession(), getServletContext()
+ 				 
+ - request 						: 클라이언트의 요청 정보
+ (type : HttpServletRequest)  	  소멸 시점 : 응답이 생성된 이후
+ 
+ - response 					: 클라이언트로 보낼 응답정보
+ 
+ - session 					: 서버의 사용자별로 할당되는 공간, 사용자를 식별하기 위해 사용(cookie-session) 
+ (type : HttpSession)		  소멸 시점 : 특정시간이 지난 후 (서버에 설정된 시간만큼 서버로 요청을 안보내면 소멸) 
+							  or 강제로 삭제 가능(session.invalidate() )
+
+ - application 				: 서버 메모리에 할당되는 공간, 서버에 하나만 존재하는 공간
+ (type:ServletContext)		  web.xml에 설정한 초기화 파라미터 정보를 얻어올 수 있음
+ 
+ -------------------------------------------위는 자주 사용(중요) 밑은 자주 사용하진 않는다
+
+ 
+ - page : jsp페이지 객체(인스턴스)를 의미
+ 		  _jspService()
+ 
+ - config : 서블릿 컨테이너가 서블릿 초기화시 사용하는 설정을 저장한 객체
+ 			servlet의 init 메소드의 인자로 전달된다
+ 
+ - out : 응답생성을 위한 출력 객체
+ 		 servlet.getWriter() ==> PrintWriter type 객체 반환, PritWriter 객체와 유사
+ 		 
+ 		 jsp에서 문자열을 생성하기 위해 표현식을 사용.
+ 		 자바의 반복문을 사용하며 표현식을 사용하기 위해서는 다음과 같은 형태로 코드를 작성함
+ 		 
+ 		 <% for(int i = 0; i < 10; i++) { %>
+ 		 <%= 	i %>
+ 		 <% }%>
+ 		 
+ 		 스크립플릿과 표현식의 구문 표기 <%, <%= 를 열고 닫는 부분으로 코드 가독성이 떨어짐
+ 		 out 객체를 이용하면 표현식을 사용하지 않고도 문자를 출력할 수 있음
+ 		 
+ 		 <% for(int i = 0; i < 10; i++) {
+ 		 		out.write(i);
+ 		 	} %>
+------------------------------------------------------------------------- 			
