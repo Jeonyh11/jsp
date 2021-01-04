@@ -1,0 +1,129 @@
+TCP 연결성 : 프로세스 시작부터 종료까지 연결
+
+HTTP 비연결성 : 요청시 연결, 응답 후 연결종료
+
+HTTP 프로토콜의 특징
+1. 비연결성
+	- 요청을 보내고 응답을 받게 되면 서버와의 연결은 끊어진다.
+	- 서버로 재요청시 서버는 클라이언트가 누구인지 알 수 있도록 session과 cookie를 이용
+	
+2. 웹브라우저는 서버로 요청시 해당 서버(도메인)에 설정된 쿠키 값을 항상 같이 전송한다
+	- 서버가 클라이언트가 누구인지 식별할 때 사용
+	- cookie : 브라우저에 저장되는 정보
+	
+3. java기반 서버는 요청을 받게 되면 해당 요청의 쿠키 정보 중에 J_SESSIONID라는 쿠키가 있는지 확인한다
+	
+	J_SESSIONID 쿠키가 없을 경우 : 서버는 신규 접속 요청이라고 판단, SESSION을 새롭게 만들고 응답을 생성할 때
+								SESSION ID(J_SESSIONID)를 응답 헤더에 포함하고 
+								해당 응답을 받은 브라우저는 J_SESSIONID 쿠키 값을 브라우저에 저장한다.
+	
+	J_SESSIONID 쿠키가 있을 경우 : J_SESSIONID에 해당하는 SESSION을 사용(기존 접속한 사용자로 인식) 
+	
+웹에서 사용자(client)란?  -->  웹브라우저
+
+
+스코프 : 웹 어플리케이션에서 객체(속성, attribute)를 유지/공유 하는 영역
+속성 : 클라이언트의 요청을 처리하는 과정에서 servlet/jsp 사이에서 공유하는 정보
+
+scope 객체---------------------------------------------------------------------------------------------
+
+page(pageContext)			: 해당 jsp 페이지 내에서만 유효한 공간 (java의 block 안에 선언된 지역변수)
+request(HttpServletRequest)	: 요청이 처리될 때까지만 유효한 공간 (java의 지역변수)
+session (HttpSession)		: 세션이 유효한 동안만 유지되는 공간 (java의 인스턴스 객체)
+application(ServletContext) : 웹 어플리케이션에서 하나만 유지되는 공간 (java의 static 변수)
+
+ 스코프			설명							jsp				servlet
+page		jsp페이지 내에서만 공유되는 영역		pageContext		N/A						ex] 지역변수(if, for, block)
+
+request 	클라이언트의 요청정보가 유지되는		request			request					ex] 지역변수
+			동안 공유되는 영역(dispatch)
+session		클라이언트의 정보가 유지되는 동안		session			request.getSession() 	ex] 인스턴스 변수
+			공유되는 영역
+application	웹 어플리케이션 내에서 공유되는		application		getServletContext()		ex] static 변수
+			객체의 영역
+
+--------------------------------------------------------------------------------------------------------
+
+scope 객체의 속성관련 메소드
+속성 조회 : 스코프객체.getAttribute("속성명"), 반환타입 : Object 
+	***getParameter("파라미터명"), 반환타입 : String
+속성 저장 : 스코프객체.setAttribute("속성명", "속성값"), 반환타입 : void
+속성 삭제 : 스코프객체.removeAttribute("속성명"), 반환타입 : void
+속성 이름 검색 : 스코프객체.getAttributeNames(), 반환타입 : Enumeration
+
+
+
+scope 실습 시나리오-----------------------------------------------------
+
+웹 브라우저로 다음 주소에 접속 : localhost/scope (GET)
+해당 요청을 처리해줄 servlet 생성(kr.or.ddit.servlet.scope.Scope.java)
+GET 요청에 대해서는 화면을 webapp/jsp/scope.jsp로 응답 생성 위임
+
+scope.jsp에는 하나의 input 태그(name-scope)와 submit 버튼을 생성
+전송 메소드는 POST, 전송 주소는 /scope
+
+Scope.java의 doPost에서는 요청 파라미터 중 scope 파라미터를 확인하여
+request, session, application scope에 다음과 같이 속성을 저장
+
+request : 속성명 = request, 속성값 = scope파라미터값 + "_request"
+session : 속성명 = session, 속성값 = scope파라미터값 + "_session"
+application : 속성명 = application, 속성값 = scope파라미터값 + "_application"
+
+속성 설정이 끝나면 webapp/jsp/scopeResult.jsp로 forward
+scopeResult.jsp에서는 Scope servlet 에서 설정한 3개의 속성을
+속성명 : 속성값 형식으로 화면에 출력
+
+
+테스트 
+
+1] 최초 접속
+1. localhost/scope 접속
+2. input태그에 'brown'값 입력 후 전송 버튼 클릭
+3. 결과 화면 확인
+	request : brown_request
+	session : brown_session
+	application : brown_application
+	
+2] 1]번과 같은 브라우저를 사용하여
+	localhost/jsp/scopeResult.jsp로 바로 접속시
+	request : null
+	session : brown_session
+	application : brown_application
+
+3] 1]번과 다른 브라우저를 사용하여
+	localhost/jsp/scopeResult.jsp로 바로 접속시
+	request : null
+	session : null
+	application : brown_application
+	
+4] 3]번과 같은 브라우저를 사용하여
+	localhost/scope로 접속
+	input 태그에 sally 값 입력 후 전송
+	request : sally_request
+	session : sally_session
+	application : sally_application
+	
+5] 1]번과 같은 브라우저를 사용하여
+	localhost/jsp/scopeResult.jsp로 바로 접속시
+	request : null
+	session : brown_session
+	application : sally_application
+-----------------------------------------------------------------------
+
+클라이언트에서는 서버 사이드 변수 값을 활용할 수 있으나
+서버 사이드 변수에 클라이언트 사이드 변수 값을 대입할 수는 없다 
+
+실습 시나리오-----------------------------------------------------
+
+localhost/sumCalculation
+
+get(화면요청)
+ - start, end parameter를 입력/전송할 수 있도록 화면 구성
+ - sumCalculation servlet으로 요청
+ - 사용자가 start값을 end보다 작은 값을 넣는다고 가정
+ 
+post(결과 처리)
+ - logger로 start파라미터와 end파라미터 사이의 값을 합으로 계산 후 출력
+ - start와 end 사이의 값을 더하여 session에 'sumResult'키로 저장
+ - sumResult.jsp로 dispatch forward
+ - session에 저장된 sumResult값을 화면에 출력
