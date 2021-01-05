@@ -84,7 +84,7 @@ public class LoginController extends HttpServlet{
 		String userid = req.getParameter("userid");
 		String pass = req.getParameter("pass");
 		// 2. userid, pass 값이 저장한 값과 일치하는지 비교
-		if(userid.equals("brown") && pass.equals("brownpass")) {
+		if(userid.equals("brown") && pass.equals("1234")) {
 			// 3. 2번 비교 사항이 true일 때 webapp/main.jsp로 forward ( main.jsp는 생성 )
 			req.getRequestDispatcher("/main.jsp").forward(req, resp);
 		} else {

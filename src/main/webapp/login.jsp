@@ -11,8 +11,11 @@
 
     <title>Login</title>
 
-    <link href="<%=request.getContextPath() %>/css/bootstrap.min.css" rel="stylesheet">
+<%--     <link href="<%=request.getContextPath() %>/css/bootstrap.min.css" rel="stylesheet"> --%>
 
+	<%-- common_lib.jsp의 내용을 지금 기술되는 부분에 코드를 복사해서 붙여넣기 --%>
+	<%@ include file="/common/common_lib.jsp" %>
+	
     <link href="<%=request.getContextPath() %>/css/signin.css" rel="stylesheet">
 
   </head>

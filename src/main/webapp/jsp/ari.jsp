@@ -4,10 +4,13 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Result</title>
+	<title>Insert title here</title>
 </head>
 <body>
-	<h2>까지의 합</h2>
-	결과 : <%=session.getAttribute("sumResult") %>
+	<%
+		int a = 5;
+		int b = 0;
+		int c = a / b;
+	%>
 </body>
 </html>

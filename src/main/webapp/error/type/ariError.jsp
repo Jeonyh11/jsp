@@ -4,10 +4,9 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Result</title>
+	<title>Insert title here</title>
 </head>
 <body>
-	<h2>까지의 합</h2>
-	결과 : <%=session.getAttribute("sumResult") %>
+	<h1>arithmetic exception error page</h1>
 </body>
 </html>

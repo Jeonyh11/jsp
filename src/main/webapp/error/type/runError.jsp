@@ -3,11 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Result</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
-	<h2>까지의 합</h2>
-	결과 : <%=session.getAttribute("sumResult") %>
+	<h1>runtime exception error page</h1>
 </body>
 </html>

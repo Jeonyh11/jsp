@@ -1,4 +1,4 @@
-package kr.or.ddit.servlet.scope;
+package kr.or.ddit.servlet.basic;
 
 import java.io.IOException;
 
@@ -12,10 +12,11 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet("/sumCalculation")
-public class SumCalculation extends HttpServlet{
+@WebServlet("/mulCalculation")
+public class MulCalculation extends HttpServlet{
 	
-	private static final Logger logger = LoggerFactory.getLogger(SumCalculation.class);
+	private static final Logger logger = LoggerFactory.getLogger(MulCalculation.class);
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/jsp/Calculation.jsp").forward(req, resp);
@@ -24,25 +25,16 @@ public class SumCalculation extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		int s = Integer.parseInt(req.getParameter("start"));
-		int e = Integer.parseInt(req.getParameter("end"));
+		int s1 = Integer.parseInt(req.getParameter("param1"));
+		int s2 = Integer.parseInt(req.getParameter("param2"));
 		
-		int result = sum(s, e);
+		int result = s1 * s2;
 		
 		logger.debug("결과 : " + result);
 		
 		HttpSession session = req.getSession();
-		session.setAttribute("sumResult", result);
+		session.setAttribute("mulResult", result);
 		
-		req.getRequestDispatcher("/jsp/sumResult.jsp").forward(req, resp);
-		
-	}
-	
-	public int sum(int a, int b) {
-		int sum = 0;
-		for(int i = a; i <= b; i++) {
-			sum += i;
-		}
-		return sum;
+		req.getRequestDispatcher("/jsp/mulResult.jsp").forward(req, resp);
 	}
 }
