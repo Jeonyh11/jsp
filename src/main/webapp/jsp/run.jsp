@@ -8,7 +8,7 @@
 </head>
 <body>
 	<%
-		if( 1 == 1) {
+		if(1 == 1) {
 			throw new RuntimeException();
 		}
 	%>
