@@ -23,4 +23,5 @@ public interface UserDaoI {
 	
 	// 사용자 전체 수 조회
 	int selectAllUserCnt();
+	
 }

@@ -68,9 +68,11 @@ public class UserServiceTest {
 			Map<String, Object> map = userService.selectPagingUser(page);
 			
 			List<UserVo> userList = (List<UserVo>)map.get("userList");
+			int userCnt = (int)map.get("userCnt");
 			
 			/***Then***/
 			assertEquals(5, userList.size());
+			assertEquals(16, userCnt);
 		}
 
 }
