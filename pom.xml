@@ -48,6 +48,22 @@
 	    <scope>test</scope>
 	</dependency>
 	
+	<!-- mybatis -->	
+	<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+	<dependency>
+	    <groupId>org.mybatis</groupId>
+	    <artifactId>mybatis</artifactId>
+	    <version>3.5.6</version>
+	</dependency>
+	
+	<!-- ojdbc6 -->
+	<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc6 -->
+	<dependency>
+	    <groupId>com.oracle.database.jdbc</groupId>
+	    <artifactId>ojdbc6</artifactId>
+	    <version>11.2.0.4</version>
+	</dependency>
+	
 	
   </dependencies>
   

@@ -16,63 +16,21 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.or.ddit.user.model.UserVo;
+import kr.or.ddit.user.service.UserService;
+import kr.or.ddit.user.service.UserServiceI;
+
 // web.xml에 설정하는 servlet, servlet-mapping을 어노테이션을 통해 설정하는 방법 
 @WebServlet("/loginController")
 public class LoginController extends HttpServlet{
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
+	private UserServiceI userService = new UserService();
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
-		// 클라이언트가 서버로 요청을 보낼시 브라우저에 의해 같이 전송된 쿠키 정보 확인 
-		Cookie[] cookies = req.getCookies();
-		for(Cookie cookie : cookies) {
-			logger.debug("cookie.getName() : {} / cookie.getValue() : {} ", cookie.getName(), cookie.getValue());
-			
-			// 응답 전송시 쿠키를 생성해서 같이 보내준다
-			if(cookie.getName().equals("userid")) {
-				Cookie newServerCookie = new Cookie("newServerCookie", "testValue");
-				resp.addCookie(newServerCookie);
-			}
-		}
-		
-		// 사용자가 userid, password 파라미터를 전송 했다는 가정으로 개발
-		
-		// 하나의 파라미터 확인
-		logger.debug("하나의 파라미터 확인");
-		logger.debug("req.getParameter(\"userid\") : {}" , req.getParameter("userid"));
-		logger.debug("req.getParameter(\"pass\") : {}" , req.getParameter("pass"));
-		
-		// 복수개의 값을 갖는 파라미터 확인
-		logger.debug("복수개의 값을 갖는 파라미터 확인");
-		logger.debug("req.getParameterValues(\"userid\") : ");
-		
-		for( String userid : req.getParameterValues("userid")) {
-			logger.debug(userid);
-		}
-		
-		// 요청에 담긴 파라미터 이름을 확인
-		logger.debug("요청에 담긴 파라미터 이름 확인");
-		logger.debug("req.getParameterNames() : ");
-		
-		Enumeration<String> enumeration = req.getParameterNames();
-		while(enumeration.hasMoreElements()) {
-			logger.debug(enumeration.nextElement());
-		}
-		
-		// 요청에 담긴 파라미터를 관리하는 맵객체 확인
-		logger.debug("요청에 담긴 파라미터를 관리하는 맵객체 확인");
-		logger.debug("req.getParameterMap() : ");
-		Map<String, String[]> map = req.getParameterMap();
-		Set<String> keys = map.keySet();
-		
-		Iterator<String> it = keys.iterator();
-		
-		while(it.hasNext()) {
-			logger.debug("{}", map.get(it.next()));
-		}
 		/*
 		 로그인 성공시 main.jsp로 이동
 		 로그인 프로세스
@@ -96,14 +54,21 @@ public class LoginController extends HttpServlet{
 		*/
 		
 		// 1. userid, pass 파라미터를 문자열 변수에 저장
+		// 2. userid, pass 값이 저장한 값과 일치하는지 비교
+		// 3. 2번 비교 사항이 true일 때 webapp/main.jsp로 forward ( main.jsp는 생성 )
+		// 4. 2번 비교 사항이 false일 때 webapp/login.jsp로 redirect
+		
 		String userid = req.getParameter("userid");
 		String pass = req.getParameter("pass");
-		// 2. userid, pass 값이 저장한 값과 일치하는지 비교
-		if(userid.equals("brown") && pass.equals("1234")) {
-			// 3. 2번 비교 사항이 true일 때 webapp/main.jsp로 forward ( main.jsp는 생성 )
+		
+		// 로그인 성공 ==> service를 통해 데이터베이스에 저장된 값과 일치할 때
+		//				 session에 데이터베이스에서 조회한 사용자 정보(userVo)를 저장
+		
+		UserVo user = userService.selectUser(userid);
+		
+		if(user != null && pass.equals(user.getPass())) {
 			req.getRequestDispatcher("/main.jsp").forward(req, resp);
 		} else {
-			// 4. 2번 비교 사항이 false일 때 webapp/login.jsp로 redirect
 			resp.sendRedirect(req.getContextPath()+"/login.jsp");
 		}
 		

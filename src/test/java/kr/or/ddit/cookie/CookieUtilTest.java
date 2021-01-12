@@ -46,7 +46,8 @@ public class CookieUtilTest {
 		/***When***/
 		String cookieValue = CookieUtil.getCookieValue(cookieStr, cookieName);
 		logger.debug("{}",cookieValue);
+		
 		/***Then***/
-		assertEquals("brown", cookieValue);
+		assertEquals("", cookieValue);
 	}
 }
