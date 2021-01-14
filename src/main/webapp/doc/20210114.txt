@@ -1,0 +1,29 @@
+사용자 삭제
+
+흐름 
+사용자가 사용자 삭제 버튼을 클릭 했을 때, 상세 조회된 사용자의 아이디를 파라미터로 전송
+데이터베이스에서 삭제!
+	- 삭제가 정상적으로 완료가 된 경우    : 사용자 페이징 리스트 1페이지로 이동
+	- 삭제가 정상적으로 완료되지 않은 경우 : 해당 사용자의 상세 조회 페이지로 이동 
+
+
+1. 사용자 상세조회 페이지에 사용자 삭제 버튼 추가
+	-
+	-	
+	
+2. controller 생성 ( kr.or.ddit.user.controller.UserDelete )
+
+3. service, dao 삭제로직 생성
+
+
+상향식( bottom up ) 
+sql => dao => daoTest => service => serviceTest => controller => jsp
+
+
+
+사용자 상세조회 페이지 사용자 이미지 추가
+사용자의 이미지는 webapp/profile에 저장
+파일이름의 규칙 => 사용자아이디.png
+	brown ==> brown.png
+	sally ==> sally.png
+	

@@ -116,4 +116,21 @@ public class UserDao implements UserDaoI{
 		return cnt;
 	}
 
+	@Override
+	public int deleteUser(String userid) {
+		
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		
+		int cnt = sqlSession.delete("users.deleteUser", userid);
+		
+		if(cnt == 1) {
+			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
+		}
+		sqlSession.close();
+		
+		return cnt;
+	}
+
 }

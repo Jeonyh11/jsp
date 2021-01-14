@@ -43,7 +43,14 @@ public class RegistUser extends HttpServlet{
 		
 		UserVo userVo = new UserVo(userid, usernm, pass, reg_dt, alias, addr1, addr2, zipcode);
 		
-		int insertCnt = userService.insertUser(userVo);
+		int insertCnt = 0;
+		
+		try {
+			insertCnt = userService.insertUser(userVo);
+		} catch (Exception e) {
+			insertCnt = 0;
+		}
+		
 		
 		if(insertCnt == 1) {
 			

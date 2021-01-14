@@ -49,11 +49,12 @@ public class UserService implements UserServiceI{
 
 	@Override
 	public int insertUser(UserVo userVo) {
-		try {
-			return userDao.insertUser(userVo);
-		} catch (Exception e) {
-			return 0;
-		}
+		return userDao.insertUser(userVo);
+	}
+
+	@Override
+	public int deleteUser(String userid) {
+		return userDao.deleteUser(userid);
 	}
 
 }
