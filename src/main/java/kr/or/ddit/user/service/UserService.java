@@ -42,4 +42,18 @@ public class UserService implements UserServiceI{
 		return userDao.selectAllEmp();
 	}
 
+	@Override
+	public int modifyUser(UserVo userVo) {
+		return userDao.modifyUser(userVo);
+	}
+
+	@Override
+	public int insertUser(UserVo userVo) {
+		try {
+			return userDao.insertUser(userVo);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
 }

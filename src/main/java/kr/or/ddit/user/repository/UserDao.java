@@ -79,4 +79,41 @@ public class UserDao implements UserDaoI{
 		return cnt;
 	}
 
+	@Override
+	public int modifyUser(UserVo userVo) {
+		
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		
+		int updatecnt = sqlSession.update("users.modifyUser", userVo);
+		
+		// select가 아닌 데이터에 영향을 주는 경우 commit을 해야한다
+		
+		if(updatecnt == 1) {
+			sqlSession.commit();
+		} else {	// 비정상적으로 동작했을 경우 rollback을 한다
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return updatecnt;
+	}
+
+	@Override
+	public int insertUser(UserVo userVo) {
+		
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		
+		int cnt = sqlSession.insert("users.insertUser", userVo);
+		
+		if(cnt == 1) {
+			sqlSession.commit();
+		} else {	// 비정상적으로 동작했을 경우 rollback을 한다
+			sqlSession.rollback();
+		}
+		sqlSession.close();
+		
+		return cnt;
+	}
+
 }

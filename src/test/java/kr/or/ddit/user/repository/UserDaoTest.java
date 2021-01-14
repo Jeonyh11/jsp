@@ -3,6 +3,7 @@ package kr.or.ddit.user.repository;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -69,6 +70,20 @@ public class UserDaoTest {
 		assertEquals(16,userCnt);
 	}
 	
+	@Test
+	public void modifyUserTest() {
+		/***Given***/
+		// userid, usernm, pass, reg_dt, alias, addr1, addr2, zipcode
+		UserVo userVo = new UserVo("ddit","대덕인재", "dditPass", new Date(),
+									"개발원m", "대전시 중구 중앙로79", "4층", "34940");
+		UserDaoI userDao = new UserDao();
+
+		/***When***/
+		int updateCnt = userDao.modifyUser(userVo);
+
+		/***Then***/
+		assertEquals(1, updateCnt);
+	}
 }
 
 

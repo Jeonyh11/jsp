@@ -21,4 +21,9 @@ public interface UserServiceI {
 	// 전체 직원 정보 조회
 	List<EmpVo> selectAllEmp();
 	
+	// 사용자 정보 수정
+	int modifyUser(UserVo userVo);
+	
+	// 사용자 등록
+	int insertUser(UserVo userVo);
 }

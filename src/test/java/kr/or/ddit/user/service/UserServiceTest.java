@@ -2,6 +2,7 @@ package kr.or.ddit.user.service;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,8 @@ import org.junit.Test;
 
 import kr.or.ddit.common.model.PageVo;
 import kr.or.ddit.user.model.UserVo;
+import kr.or.ddit.user.repository.UserDao;
+import kr.or.ddit.user.repository.UserDaoI;
 
 public class UserServiceTest {
 
@@ -73,6 +76,22 @@ public class UserServiceTest {
 			/***Then***/
 			assertEquals(5, userList.size());
 			assertEquals(16, userCnt);
+		}
+		
+		
+		@Test
+		public void modifyUserTest() {
+			/***Given***/
+			// userid, usernm, pass, reg_dt, alias, addr1, addr2, zipcode
+			UserVo userVo = new UserVo("ddit","대덕인재", "dditPass", new Date(),
+										"개발원", "대전시 중구 중앙로79", "4층", "34940");
+			UserServiceI userService = new UserService();
+
+			/***When***/
+			int updateCnt = userService.modifyUser(userVo);
+
+			/***Then***/
+			assertEquals(1, updateCnt);
 		}
 
 }
