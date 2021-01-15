@@ -119,9 +119,11 @@ public class UserServiceTest {
 		/***Given***/
 		UserVo userVo = new UserVo("ddit_n", "대덕인재", "dditPass", new Date(), 
 										"개발원_m", "대전시 중구 중앙로79", "4층", "34940");
+
 		/***When***/
 		int insertCnt = userService.insertUser(userVo);
 		
+
 		/***Then***/
 		assertEquals(1, insertCnt);
 	}
