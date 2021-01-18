@@ -18,7 +18,7 @@
 	
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 	
-    <link href="<%=request.getContextPath() %>/css/signin.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/signin.css" rel="stylesheet">
 	
 	<script>
 		function getCookieValue(cookieStr, cookieName) {

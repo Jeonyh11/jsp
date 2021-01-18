@@ -104,7 +104,7 @@ HttpServletRequest : 사용자가 요청을 보낼 때의 정보(파라미터, �
 	        ==> jsp라는 이름의 컨텍스트 패스를 수정할 경우 링크와 관련된 부분을 모두 수정해야하는 문제점이 발생
 	        
 	         	request.getContextPath()메소드를 통해 유지 보수 문제 해결 가능
-	         	<img src="<%=request.getContextPath()%>/image/brown.png"/>
+	         	<img src="${pageContext.request.contextPath}/image/brown.png"/>
 	         	
 	         	
 	<실습>         	

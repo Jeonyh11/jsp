@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,22 +45,22 @@
 									<th>사용자 아이디</th>
 									<th>사용자 이름</th>
 									<th>사용자 별명</th>
-									<th>등록일시</th>
+									<th>등록일시fsdfsdfsd</th>
 								</tr>
-								<%
-									List<UserVo> users = (List<UserVo>)request.getAttribute("userList"); 
-									for(UserVo vo : users){
-								%>
-								
+<%-- 								<% --%>
+<!--  									List<UserVo> users = (List<UserVo>)request.getAttribute("userList");  -->
+<!--  									for(UserVo vo : users){ -->
+<%-- 								%> --%>
+								<c:forEach items="${userList }" var="user">
+																
 								<tr>
-									<td><%=vo.getUserid() %></td>
-									<td><%=vo.getUsernm() %></td>
-									<td><%=vo.getAlias() %></td>
-									<td><%=vo.getReg_dt_fmt() %></td>
+									<td>${user.userid }</td>
+									<td>${user.usernm }</td>
+									<td>${user.alias }</td>
+									<td>${user.getReg_dt_fmt() }</td>
 								</tr>
-								<%
-									}
-								%>
+								
+								</c:forEach>
 							</table>
 						</div>
 				

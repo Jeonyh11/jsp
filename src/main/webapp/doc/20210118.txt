@@ -1,0 +1,18 @@
+${pageContext.}
+${param.}
+${request.} 자동완성이 없다 ==> 객체 기능이 없다
+
+JSTL CORE 조건 제어(java if)
+if ==> java 단일 if
+choose ==> java if, 
+
+JSTL 반복문(for, 향상된 for) *** 많이 사용
+
+	forEach
+
+JSTL core URL
+ import : 특정 url에서 반환하는 값(html)을 호출하는 곳에 추가하는 기능
+ redirect : 클라이언트에게 다른 url로 재전송 요청
+ url : url 경로 작성
+ 
+ 
