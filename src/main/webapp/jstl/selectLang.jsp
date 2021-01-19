@@ -25,7 +25,7 @@ $(function(){
 <body>
 param : [${param.lang }]
 <!-- 전송을 위해서 name을 설정 -->
-<form action ="${pageContext.request.contextPath }/jstl/selectLang.jsp">
+<form action ="${cp }/jstl/selectLang.jsp">
 <select id="select" name="lang">
 	<option value="ko">한국어</option>
 	

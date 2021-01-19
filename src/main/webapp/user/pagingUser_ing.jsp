@@ -38,7 +38,7 @@
 </head>
 
 <body>
-	<form id="frm" action="${pageContext.request.contextPath}/user">
+	<form id="frm" action="${cp}/user">
 		<input type="hidden" id="userid" name="userid" value=""/>
 	</form>
 	<%@ include file="/common/header.jsp" %>
@@ -93,7 +93,7 @@
 							</table>
 						</div>
 				
-						<a class="btn btn-default pull-right" href="${pageContext.request.contextPath}/registUser">사용자 등록</a>
+						<a class="btn btn-default pull-right" href="${cp}/registUser">사용자 등록</a>
 				
 						<div class="text-center">
 <%-- 							<% --%>
@@ -101,7 +101,7 @@
 <%-- 							%> --%>
 <%-- 							<c:set var ="pageVo" value="${pageVo }"/> --%>
 							<ul class="pagination">
-								<li class="prev"><a href="${pageContext.request.contextPath}/pagingUser?page=1&pageSize=${pageVo.getPageSize() }">«</a></li>
+								<li class="prev"><a href="${cp}/pagingUser?page=1&pageSize=${pageVo.getPageSize() }">«</a></li>
 
 									<c:forEach items="${PageVo }" var="page">
 										<c:choose>
@@ -109,7 +109,7 @@
 												<li class="active"><span>${page }</span></li>
 											</c:when>
 											<c:otherwise>
-												<li><a href="${pageContext.request.contextPath}/pagingUser?page=${page }&pageSize=${pageVo.getPageSize() }">${page }</a></li>
+												<li><a href="${cp}/pagingUser?page=${page }&pageSize=${pageVo.getPageSize() }">${page }</a></li>
 											</c:otherwise>	
 										
 										</c:choose>
@@ -128,12 +128,12 @@
 <%-- 								<%	 --%>
 <!--  										} else { -->
 <%-- 								%> --%>
-<%-- 										<li><a href="${pageContext.request.contextPath}/pagingUser?page=<%=i %>&pageSize=<%=pageVo.getPageSize()%>"><%=i %></a></li> --%>
+<%-- 										<li><a href="${cp}/pagingUser?page=<%=i %>&pageSize=<%=pageVo.getPageSize()%>"><%=i %></a></li> --%>
 								
 <%-- 								<%		} --%>
 <!--  									}	 -->
 <%-- 								%> --%>
-								<li class="next"><a href="${pageContext.request.contextPath}/pagingUser?page=${pagination }&pageSize=${pageVo.getPageSize() }">»</a></li>
+								<li class="next"><a href="${cp}/pagingUser?page=${pagination }&pageSize=${pageVo.getPageSize() }">»</a></li>
 							</ul>
 						</div>
 					</div>

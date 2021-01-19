@@ -88,6 +88,15 @@
 		<exception-type>java.lang.RuntimeException</exception-type>
 		<location>/error/type/runError.jsp</location>
 	</error-page>
+	
+	<!-- Listener -->
+	<listener>
+	<listener-class>kr.or.ddit.listener.ApplicationListener</listener-class>
+	</listener>
+	
+	<listener>
+	<listener-class>kr.or.ddit.listener.LoginUserListener</listener-class>
+	</listener>
 
 	<resource-ref>
 		<description>DB Connection</description>

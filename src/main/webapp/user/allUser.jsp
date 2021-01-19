@@ -19,8 +19,8 @@
 	<%@ include file="/common/common_lib.jsp" %>
 	
 	<script src="/js/jquery/jquery-1.12.4.js"></script>
-	<link href="<%=request.getContextPath() %>/css/dashboard.css" rel="stylesheet">
-	<link href="<%=request.getContextPath() %>/css/blog.css" rel="stylesheet">
+	<link href="${cp }/css/dashboard.css" rel="stylesheet">
+	<link href="${cp }/css/blog.css" rel="stylesheet">
 </head>
 
 <body>

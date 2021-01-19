@@ -18,7 +18,7 @@
 	
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 	
-    <link href="${pageContext.request.contextPath}/css/signin.css" rel="stylesheet">
+    <link href="${cp}/css/signin.css" rel="stylesheet">
 	
 	<script>
 		function getCookieValue(cookieStr, cookieName) {
@@ -94,7 +94,8 @@
 <body>
 
     <div class="container">
-    	UNT_CD : ${param.UNT_CD } / <%=request.getParameter("UNT_CD") %>
+    	cp : ${cp } / <%=application.getAttribute("cp") %>
+<%--     	UNT_CD : ${param.UNT_CD } / <%=request.getParameter("UNT_CD") %> --%>
 
       <form class="form-signin" id="frm" action="<%=request.getContextPath() %>/loginController" method="post">
       	<h2 class="form-signin-heading">Please sign in</h2>

@@ -21,8 +21,8 @@
 	<%@ include file="/common/common_lib.jsp" %>
 	
 	<script src="/js/jquery/jquery-1.12.4.js"></script>
-	<link href="${pageContext.request.contextPath}/css/dashboard.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/css/blog.css" rel="stylesheet">
+	<link href="${cp}/css/dashboard.css" rel="stylesheet">
+	<link href="${cp}/css/blog.css" rel="stylesheet">
 	
 	<script>
 		// 문서 로딩이 완료되고 나서 실행되는 영역
@@ -40,7 +40,7 @@
 </head>
 
 <body>
-	<form id="frm" action="${pageContext.request.contextPath}/user">
+	<form id="frm" action="${cp}/user">
 	
 		<input type="hidden" id="userid" name="userid" value=""/>
 <!-- 		$('#userid').val(userid); -->
@@ -81,12 +81,12 @@
 							</table>
 						</div>
 				
-						<a class="btn btn-default pull-right" href="${pageContext.request.contextPath}/registUser">사용자 등록</a>
+						<a class="btn btn-default pull-right" href="${cp}/registUser">사용자 등록</a>
 				
 						<div class="text-center">
 							
 							<ul class="pagination">
-								<li class="prev"><a href="${pageContext.request.contextPath}/pagingUser?page=1&pageSize=${pageVo.pageSize}">«</a></li>
+								<li class="prev"><a href="${cp}/pagingUser?page=1&pageSize=${pageVo.pageSize}">«</a></li>
 								
 								<c:forEach begin="1" end="${userCnt }" var="i">
 												
@@ -96,13 +96,13 @@
 									
 									</c:when>
 									<c:otherwise>
-										<li><a href="${pageContext.request.contextPath}/pagingUser?page=${i }&pageSize=${pageVo.getPageSize()}">${i }</a></li>
+										<li><a href="${cp}/pagingUser?page=${i }&pageSize=${pageVo.getPageSize()}">${i }</a></li>
 									
 									</c:otherwise>
 								</c:choose>
 							
 								</c:forEach>
-								<li class="next"><a href="${pageContext.request.contextPath}/pagingUser?page=${userCnt }&pageSize=${pageVo.getPageSize()}">»</a></li>
+								<li class="next"><a href="${cp}/pagingUser?page=${userCnt }&pageSize=${pageVo.getPageSize()}">»</a></li>
 							</ul>
 						</div>
 					</div>
