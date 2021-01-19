@@ -11,5 +11,6 @@
 
 <c:import url="https://search.naver.com/search.naver"></c:import>
 	<c:param name ="query" value="코로나"/>
-	</body>
+	
+</body>
 </html>

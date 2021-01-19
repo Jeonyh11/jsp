@@ -5,6 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +41,10 @@
 
 <body>
 	<form id="frm" action="${pageContext.request.contextPath}/user">
+	
 		<input type="hidden" id="userid" name="userid" value=""/>
+<!-- 		$('#userid').val(userid); -->
+<!-- 				$('#frm').submit(); -->
 	</form>
 	<%@ include file="/common/header.jsp" %>
 
@@ -66,17 +70,18 @@
 								</tr>
 							
 								<c:forEach items="${userList }" var="user">
-									<tr>
+									<tr class ="user" data-userid="${user.userid }">
 										<td>${user.userid }</td>
 										<td>${user.usernm }</td>
 										<td>${user.alias }</td>
-										<td>${user.getReg_dt_fmt() }</td>
+<%-- 										<td>${user.getReg_dt_fmt() }</td> --%>
+										<td><fmt:formatDate value="${user.reg_dt }" pattern="yyyy.MM.dd"/></td>
 									</tr>
 								</c:forEach>
 							</table>
 						</div>
 				
-						<a class="btn btn-default pull-right" href="${pageContext.request.contextPath}%>/registUser">사용자 등록</a>
+						<a class="btn btn-default pull-right" href="${pageContext.request.contextPath}/registUser">사용자 등록</a>
 				
 						<div class="text-center">
 							

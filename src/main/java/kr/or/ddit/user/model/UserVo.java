@@ -58,17 +58,17 @@ public class UserVo {
 	public void setReg_dt(Date reg_dt) {
 		this.reg_dt = reg_dt;
 	}
-	public String getReg_dt_fmt() {
-		// reg_dt 필드가 null이면 "" 문자열 반환
-		// reg_dt 필드가 null이 아니면 SimpleDateFormat을 생성하여 yyyy.MM.dd 포맷의 문자열로 반환하여 리턴
-		if (this.reg_dt == null) {
-			return "";
-		} else {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-			return sdf.format(this.reg_dt);
-			
-		}
-	}
+//	public String getReg_dt_fmt() {
+//		// reg_dt 필드가 null이면 "" 문자열 반환
+//		// reg_dt 필드가 null이 아니면 SimpleDateFormat을 생성하여 yyyy.MM.dd 포맷의 문자열로 반환하여 리턴
+//		if (this.reg_dt == null) {
+//			return "";
+//		} else {
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+//			return sdf.format(this.reg_dt);
+//			
+//		}
+//	}
 	public String getAlias() {
 		return alias;
 	}
