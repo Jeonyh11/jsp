@@ -1,0 +1,27 @@
+String contentDisposition = "form-data; name="file"; filename="brown.png"";
+
+FilUtil
+
+사용자가 업로드한 파일명
+	서버에 저장할 때 파일 이름 다르게 
+	
+TDD : Test Driven Developement
+테스트 코드 ==>  성공 ==> 새로운 요구사항 ==> 테스트 코드 ==> 실패 ==> 운영코드 수정
+					 새로운 요구사항 ==> 테스트 코드 ==> 실패 ==> 운영코드 수정
+					 새로운 요구사항 ==> 테스트 코드 ==> 실패 ==> 운영코드 수정
+					 새로운 요구사항 ==> 테스트 코드 ==> 실패 ==> 운영코드 수정
+					 
+파일 업로드시 준비 사항
+1. form 태그 enctype 속성 => enctype="multipart/form-data"
+2. form 태그 method 속성 ==> mothod="post"
+3. servlet ==> @MultipartConfig
+
+
+사용자가 사진을 새롭게 전송을 했는지 여부 체크
+
+1. 사진을 안보낸 경우
+	==> filename, realfilename 기존 값으로 유지
+2. 사진을 보낸 경우
+	==> 업로드시 생성된 filename, realfilename 으로 변경
+	
+	

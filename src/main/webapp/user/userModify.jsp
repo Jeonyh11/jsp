@@ -56,50 +56,66 @@
 			
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-				<% UserVo user = (UserVo)request.getAttribute("user"); %>
-				<form class="form-horizontal" role="form" action="${cp}/userModify" method="POST">
+<!-- 				req.setAttribute("user", user); -->
+				<form class="form-horizontal" role="form" action="${cp}/userModify" method="POST" enctype="multipart/form-data">
 					
-					<input type="hidden" name="userid" value="<%=user.getUserid() %>"/>
+					<input type="hidden" name="userid" value="${user.userid}"/>
+					
+					<div class="form-group">
+						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>					
+						<div class="col-sm-10">
+							<img src="${cp}/profile/${user.userid }.png"/>
+							<input type="file" class ="form-control" id="profile" name="profile"/>
+						
+						</div>
+					</div>
+					
 					
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 아이디</label>
 						<div class="col-sm-8">
-							<label class="control-label"><%=user.getUserid() %></label>
+							<label class="control-label" >${user.userid }</label>
+							
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 이름</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="usernm" name="usernm" placeholder="사용자 이름" value="<%=user.getUsernm()%>">
+							<input type="text" class="form-control" id="usernm" name="usernm"
+							  value="${user.usernm}"/>
 						</div>
 					</div>
 						
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">별명</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="alias" name="alias" placeholder="별명" value="<%=user.getAlias() %>">
+							<input type="text" class="form-control" id="alias" name="alias" 
+								 value="${user.alias}">
 						</div>
 					</div>
 							
 					<div class="form-group">
 						<label for="pass" class="col-sm-2 control-label">비밀번호</label>
 						<div class="col-sm-8">
-							<input type="password" class="form-control" id="pass" name="pass" placeholder="비밀번호" value="<%=user.getPass() %>">
+							<input type="password" class="form-control" id="pass" name="pass"
+								 value="${user.pass }">
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="pass" class="col-sm-2 control-label">등록일자</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="reg_dt" name="reg_dt" placeholder="등록일자" value="<%=user.getReg_dt() %>">
+							<input type="text" class="form-control" id="reg_dt" name="reg_dt"
+								  value="${user.reg_dt }">
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="pass" class="col-sm-2 control-label">도로주소</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="addr1" name="addr1" placeholder="도로주소" value="<%=user.getAddr1() %>" readonly>
+							<input type="text" class="form-control" id="addr1" name="addr1"
+								  value="${user.addr1 }" readonly>
 						</div>
 						<div class="col-sm-2">
 							<button type="button" id="addrBtn"class="btn btn-default">주소검색</button>
@@ -109,13 +125,16 @@
 					<div class="form-group">
 						<label for="pass" class="col-sm-2 control-label">상세주소</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="addr2" name="addr2" placeholder="상세주소" value="<%=user.getAddr2() %>">
+							<input type="text" class="form-control" id="addr2" name="addr2"
+								  value="${user.addr2 }">
+								  
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="pass" class="col-sm-2 control-label">우편번호</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="우편번호" value="<%=user.getZipcode() %>" readonly>
+							<input type="text" class="form-control" id="zipcode" name="zipcode"
+									 placeholder="우편번호" value="${user.zipcode }" readonly>
 						</div>
 					</div>
 

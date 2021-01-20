@@ -4,18 +4,23 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import kr.or.ddit.user.model.UserVo;
+import kr.or.ddit.user.repository.UserDao;
 import kr.or.ddit.user.service.UserService;
 import kr.or.ddit.user.service.UserServiceI;
+import kr.or.ddit.util.FileUtil;
 
-
+@MultipartConfig
 @WebServlet("/userModify")
 public class UserModify extends HttpServlet{
 
@@ -59,7 +64,34 @@ public class UserModify extends HttpServlet{
 		String addr2 = req.getParameter("addr2");
 		String zipcode = req.getParameter("zipcode");
 		
-		UserVo userVo = new UserVo(userid, usernm, pass, reg_dt, alias, addr1, addr2, zipcode);
+		
+//		1. 사진을 안보낸 경우
+//			==> filename, realfilename 기존 값으로 유지
+//		2. 사진을 보낸 경우
+//			==> 업로드시 생성된 filename, realfilename 으로 변경
+		Part profile = req.getPart("profile");
+		
+		String filename ="";
+		String realfilename="";
+		
+		UserServiceI userService = new UserService();
+		
+		if(profile.getSize() == 0) {
+			UserVo userVo = userService.selectUser(userid);
+			filename = userVo.getFilename();
+			realfilename = userVo.getRealfilename();
+		}
+		else if(profile.getSize() > 0) {
+			filename = FileUtil.getFileName(profile.getHeader("Content-Disposition"));
+			String fileExtension = FileUtil.getFileExtension(filename);
+			//brown / brown.png  .이 있는 경우 없는 경우
+			realfilename = UUID.randomUUID().toString() + fileExtension;
+		
+			//업로드
+			profile.write("d:\\upload\\" + realfilename);
+	}
+		
+		UserVo userVo = new UserVo(userid, usernm, pass, reg_dt, alias, addr1, addr2, zipcode,"","");
 		
 		int updateCnt = 0;
 		

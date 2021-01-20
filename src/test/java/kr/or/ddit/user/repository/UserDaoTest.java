@@ -22,7 +22,7 @@ public class UserDaoTest {
 		userDao = new UserDao();
 		// 테스트에서 사용할 신규 사용자 추가
 		UserVo userVo = new UserVo("testUser", "테스트용", "1234", new Date(), "테스트",
-							 		"대전시 중구 중앙로79", "4층", "34940");
+							 		"대전시 중구 중앙로79", "4층", "34940","","");
 		
 		userDao.insertUser(userVo);
 		
@@ -93,7 +93,7 @@ public class UserDaoTest {
 		/***Given***/
 		// userid, usernm, pass, reg_dt, alias, addr1, addr2, zipcode
 		UserVo userVo = new UserVo("ddit","대덕인재", "dditPass", new Date(),
-									"개발원", "대전시 중구 중앙로79", "4층", "34940");
+									"개발원", "대전시 중구 중앙로79", "4층", "34940","","");
 
 		/***When***/
 		int updateCnt = userDao.modifyUser(userVo);
@@ -106,7 +106,7 @@ public class UserDaoTest {
 	public void registUserTest() {
 		/***Given***/
 		UserVo userVo = new UserVo("ddit_n", "대덕인재", "dditPass", new Date(), 
-										"개발원_m", "대전시 중구 중앙로79", "4층", "34940");
+										"개발원_m", "대전시 중구 중앙로79", "4층", "34940","","");
 
 		/***When***/
 		int insertCnt = userDao.insertUser(userVo);
