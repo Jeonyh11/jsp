@@ -88,7 +88,7 @@
 							<ul class="pagination">
 								<li class="prev"><a href="${cp}/pagingUser?page=1&pageSize=${pageVo.pageSize}">«</a></li>
 								
-								<c:forEach begin="1" end="${userCnt }" var="i">
+								<c:forEach begin="1" end="${pagination }" var="i">
 												
 								<c:choose>
 									<c:when test="${pageVo.page == i }">
@@ -102,7 +102,7 @@
 								</c:choose>
 							
 								</c:forEach>
-								<li class="next"><a href="${cp}/pagingUser?page=${userCnt }&pageSize=${pageVo.getPageSize()}">»</a></li>
+								<li class="next"><a href="${cp}/pagingUser?page=${pagination }&pageSize=${pageVo.getPageSize()}">»</a></li>
 							</ul>
 						</div>
 					</div>

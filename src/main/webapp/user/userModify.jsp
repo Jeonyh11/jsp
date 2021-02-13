@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +64,7 @@
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>					
 						<div class="col-sm-10">
-							<img src="${cp}/profile/${user.userid }.png"/>
+							<img src="/profile?userid=${user.userid }"/>
 							<input type="file" class ="form-control" id="profile" name="profile"/>
 						
 						</div>
@@ -107,8 +107,9 @@
 						<label for="pass" class="col-sm-2 control-label">등록일자</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" id="reg_dt" name="reg_dt"
-								  value="${user.reg_dt }">
+								  value="<fmt:formatDate value="${user.reg_dt }" pattern="yyyy.MM.dd"/>">
 						</div>
+						${user.reg_dt }
 					</div>
 					
 					<div class="form-group">

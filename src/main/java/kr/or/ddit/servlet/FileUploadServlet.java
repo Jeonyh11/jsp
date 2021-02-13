@@ -54,9 +54,9 @@ public class FileUploadServlet extends HttpServlet{
       
       // 복수개의 파일을 업로드하고 파트 이름을 모를 때
       Collection<Part> parts = req.getParts();
-      for(Part p : parts) {
-         
-      }
+//      for(Part p : parts) {
+//         
+//      }
       
       logger.debug("Content-Disposition : {}", part.getHeader("Content-Disposition"));
       

@@ -7,7 +7,7 @@
    <typeAliases>
       <typeAlias type="kr.or.ddit.user.model.UserVo" alias = "userVo"/>
       <typeAlias type="kr.or.ddit.common.model.PageVo" alias = "pageVo"/>
-      <typeAlias type="kr.or.ddit.user.model.EmpVo" alias = "empVo"/>
+     
    </typeAliases>
    
      <environments default="development">

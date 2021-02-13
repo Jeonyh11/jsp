@@ -54,6 +54,18 @@ public class UserDao implements UserDaoI{
 		
 		return userList;
 	}
+	
+	@Override
+	public int selectAllUserCnt() {
+		
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		
+		int cnt = sqlSession.selectOne("users.selectAllUserCnt");
+		
+		sqlSession.close();
+		
+		return cnt;
+	}
 
 	@Override
 	public List<EmpVo> selectAllEmp() {
@@ -67,17 +79,6 @@ public class UserDao implements UserDaoI{
 		return empList;
 	}
 
-	@Override
-	public int selectAllUserCnt() {
-		
-		SqlSession sqlSession = MybatisUtil.getSqlSession();
-		
-		int cnt = sqlSession.selectOne("users.selectAllUserCnt");
-		
-		sqlSession.close();
-		
-		return cnt;
-	}
 
 	@Override
 	public int modifyUser(UserVo userVo) {
